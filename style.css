@@ -1,28 +1,122 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     text-align: center;
-    background-color: #f4f4f4;
-    margin: 0;
+    background-color: #ffffff;
     padding: 20px;
+    color: #4a7c6c;
 }
 
-header {
-    background-color: #4CAF50;
-    color: white;
-    padding: 20px;
-    border-radius: 10px;
+.container {
+    max-width: 500px;
+    margin: auto;
 }
 
-button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #008CBA;
+h1 {
+    font-size: 42px;
+    font-family: 'Georgia', serif;
+    font-weight: bold;
+}
+
+.decor {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+button, .nav-button {
+    padding: 8px 16px;
+    background-color: #4a7c6c;
     color: white;
     border: none;
     cursor: pointer;
+    margin-top: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
 }
 
-button:hover {
-    background-color: #005f73;
+button:hover, .nav-button:hover {
+    background-color: #3a6b5c;
+}
+
+.nav-button {
+    display: block;
+    width: auto;
+    padding: 10px;
+    margin: 10px;
+}
+
+.income-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+input[type="number"] {
+    width: 50%;
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #4a7c6c;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.budget-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.budget-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 10px 0;
+}
+
+.budget-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30%;
+}
+
+.budget-item label {
+    font-size: 18px;
+    color: #4a7c6c;
+    font-weight: bold;
+}
+
+.budget-item input {
+    width: 140px;
+    height: 50px;
+    font-size: 20px;
+    background-color: #fff;
+    color: #000;
+    text-align: center;
+    border: 2px solid #000;
+    border-radius: 5px;
+}
+
+.split-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    font-size: 14px;
+    margin-top: 15px;
+}
+
+.split-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 25%;
+}
+
+.split-item input {
+    width: 45px;
+    font-size: 14px;
+    padding: 3px;
+    text-align: center;
 }
