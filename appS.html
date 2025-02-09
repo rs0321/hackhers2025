@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Allocation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Budget Allocation</h1>
+        <label for="total-budget">Enter your total budget ($):</label>
+        <input type="number" id="total-budget" placeholder="e.g., 5000">
+        
+        <h2>Allocate Budget</h2>
+        <div id="categories">
+            <div class="category">
+                <input type="text" class="category-name" placeholder="Category Name">
+                <input type="number" class="category-percentage" placeholder="%" min="0" max="100">
+            </div>
+        </div>
+        
+        <button onclick="addCategory()">Add Category</button>
+        <button onclick="calculateAllocation()">Calculate</button>
+
+        <div id="results" class="hidden">
+            <h2>Allocation Breakdown</h2>
+            <ul id="allocation-list"></ul>
+        </div>
+    </div>
+
+    <script>
+        function addCategory() {
+            let categoryDiv = document.createElement("div");
+            categoryDiv.classList.add("category");
+            categoryDiv.innerHTML = `
+                <input type="text" class="category-name" placeholder="Category Name">
+                <input type="number" class="category-percentage" placeholder="%" min="0" max="100">
+            `;
+            document.getElementById("categories").appendChild(categoryDiv);
+        }
+
+        function calculateAllocation() {
+            let totalBudget = document.getElementById("total-budget").value;
+            let categories = document.getElementsByClassName("category");
+            let totalPercentage = 0;
+            let allocationList = document.getElementById("allocation-list");
+            allocationList.innerHTML = "";
+            
+            let allocations = [];
+            for (let category of categories) {
+                let name = category.getElementsByClassName("category-name")[0].value;
+                let percentage = parseFloat(category.getElementsByClassName("category-percentage")[0].value);
+                
+                if (!name || isNaN(percentage) || percentage <= 0) {
+                    alert("Please enter valid category names and percentages.");
+                    return;
+                }
+                totalPercentage += percentage;
+                allocations.push({ name, percentage });
+            }
+            
+            if (totalPercentage !== 100) {
+                alert("Total percentage must add up to 100%.");
+                return;
+            }
+            
+            allocations.forEach(allocation => {
+                let amount = (totalBudget * allocation.percentage) / 100;
+                let listItem = document.createElement("li");
+                listItem.textContent = `${allocation.name}: $${amount.toFixed(2)}`;
+                allocationList.appendChild(listItem);
+            });
+            
+            document.getElementById("results").classList.remove("hidden");
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: auto;
+        }
+        .category {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+        }
+        input {
+            width: 45%;
+            padding: 10px;
+            margin: 5px 0;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</body>
+</html>

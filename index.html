@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoneyMind</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background-color: #ffffff;
+            padding: 20px;
+            color: #4a7c6c;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+        }
+        h1 {
+            font-size: 42px;
+            font-family: 'Georgia', serif;
+            font-weight: bold;
+        }
+        .decor {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .income-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        input[type="number"] {
+            width: 50%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #4a7c6c;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .budget-title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .budget-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 10px 0;
+        }
+        .budget-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 30%;
+        }
+        .budget-item label {
+            font-size: 18px;
+            color: #4a7c6c;
+            font-weight: bold;
+        }
+        .budget-item input {
+            width: 140px;
+            height: 50px;
+            font-size: 20px;
+            background-color: #fff;
+            color: #000;
+            text-align: center;
+            border: 2px solid #000;
+            border-radius: 5px;
+        }
+        .split-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            font-size: 14px;
+            margin-top: 15px;
+        }
+        .split-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 25%;
+        }
+        .split-item input {
+            width: 45px;
+            font-size: 14px;
+            padding: 3px;
+            text-align: center;
+        }
+        button {
+            padding: 8px 16px;
+            background-color: #4a7c6c;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #3a6b5c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>MoneyMind</h1>
+        <div class="decor">~~~~~~~~~~~~~~~~~~~~~~~~</div>
+        
+        <div class="income-section">
+            <h2 style="font-size: 18px;">Post-Tax Income</h2>
+            <input type="number" id="income" placeholder="e.g., 5000">
+            <button onclick="calculateBudget()">Calculate</button>
+        </div>
+        
+        <h2 class="budget-title">Budget Breakdown</h2>
+        <div class="budget-container">
+            <div class="budget-item">
+                <label>Needs</label>
+                <input type="text" id="needs" disabled>
+            </div>
+            <div class="budget-item">
+                <label>Wants</label>
+                <input type="text" id="wants" disabled>
+            </div>
+            <div class="budget-item">
+                <label>Savings</label>
+                <input type="text" id="savings" disabled>
+            </div>
+        </div>
+        
+        <h2 style="font-size: 16px; margin-top: 20px;">Change Split</h2>
+        <div class="split-container">
+            <div class="split-item">
+                <label>Needs (%)</label>
+                <input type="number" id="needs-percentage" value="50">
+            </div>
+            <div class="split-item">
+                <label>Wants (%)</label>
+                <input type="number" id="wants-percentage" value="30">
+            </div>
+            <div class="split-item">
+                <label>Savings (%)</label>
+                <input type="number" id="savings-percentage" value="20">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function calculateBudget() {
+            let income = document.getElementById('income').value;
+            let needsPercentage = document.getElementById('needs-percentage').value;
+            let wantsPercentage = document.getElementById('wants-percentage').value;
+            let savingsPercentage = document.getElementById('savings-percentage').value;
+            
+            let totalPercentage = parseFloat(needsPercentage) + parseFloat(wantsPercentage) + parseFloat(savingsPercentage);
+            
+            if (income > 0 && totalPercentage === 100) {
+                document.getElementById('needs').value = "$" + ((income * needsPercentage) / 100).toFixed(2);
+                document.getElementById('wants').value = "$" + ((income * wantsPercentage) / 100).toFixed(2);
+                document.getElementById('savings').value = "$" + ((income * savingsPercentage) / 100).toFixed(2);
+            } else {
+                alert('Please enter a valid income and ensure the percentages add up to 100%.');
+            }
+        }
+    </script>
+    <script src="navigation_script.js"></script>
+</body>
+</html>
